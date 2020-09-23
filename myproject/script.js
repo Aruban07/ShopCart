@@ -191,6 +191,7 @@ function mainDefaultcall(pgNumber) {
 	$('.cardsCont').html('');
 	var j = 9;
 	var i = 0;
+	var k=0;
 	var len = dumData.length;
 	if (pgNumber !== undefined) {
 			j=j*pgNumber;
@@ -199,6 +200,10 @@ function mainDefaultcall(pgNumber) {
 	if(j>len){
 		j=len;
 	}
+	if(i==0){
+		k=i+1
+	}
+	$('#crntShown').text(" "+k+' - '+j+' of '+len+" ")
 	for (i; i < j; i++) {
 		$('.cardsCont').append("<div class='diviDers col-lg-4 col-md-4 col-sm-4' id='" + dumData[i].id + "'" + "></div>")
 		$('#' + dumData[i].id).append('<div class="prodCards" onclick="callths(this.id)" data-toggle="modal" data-target="#myProd" id="'+dumData[i].id+'"'+' ></div>')
