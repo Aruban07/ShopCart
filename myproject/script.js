@@ -164,6 +164,8 @@ var prodData = [
 ]
 var dumData = prodData;
 var filterData = [];
+var slider = document.getElementById("myRange");
+var prePopid;
 
 $(document).ready(function () {
 	mainDefaultcall()
@@ -225,12 +227,13 @@ $('.pagination a').click(function () {
 	//$('.pagination').find('.pgNum.active').prev().removeClass('active')
 	mainDefaultcall(dataTarget)
 })
+
 $('.next').click(function () {
 	// console.log($('.pagination').find('.pgNum.active').next())
 	$('.pagination').find('.pgNum.active').next().addClass('active')
 	$('.pagination').find('.pgNum.active').prev().removeClass('active')
 })
-var slider = document.getElementById("myRange");
+
 slider.oninput = function () {
 	$('#prcVal').text(this.value + ' - ' + '$999')
 	var minPrice = this.value;
@@ -238,7 +241,7 @@ slider.oninput = function () {
 	dumData = filterData;
 	mainDefaultcall();
 }
-var prePopid;
+
 window.addEventListener('load', function() {
     var forms = document.getElementsByClassName('needs-validation');
     var validation = Array.prototype.filter.call(forms, function(form) {
