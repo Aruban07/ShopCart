@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="style.css">
+    <title>Shopping Cart</title>
+</head>
+
+<body>
+    <nav>
+        <span class="nameBoard">Products</span>
+        <button class="btn addProduct" data-toggle="modal" data-target="#myProd">Add Product</button>
+    </nav>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="centerAlign col-mg-2 col-md-2 col-sm-2 col-xs-2"
+                    style="justify-content: flex-start;padding-left: 0;">
+                    <div class="col-mg-12 col-md-12 col-sm-12 col-xs-12" style="padding:0">
+                        <div class="category">
+                            <p class="lftHd">CATEGORIES</p>
+                            <div class="cates" data-target="bks">Books</div>
+                            <div class="cates" data-target="tsh">Hoodies/T-Shirt</div>
+                            <div class="cates" data-target="bgs">Bags</div>
+                            <div class="cates" data-target="mic">Misc</div>
+                        </div>
+                        <div class="filterBox">
+                            <p class="lftHd" style="margin-bottom: 1rem;">Filter By Price</p>
+                            <input type="range" min="9" max="999" step="4" value="0" class="slider" id="myRange">
+                            <p class="prcRang"><span>Price: $</span><span id="prcVal">9 - $999</span></p>
+                        </div>
+                        <div class="topProd">
+                            <p class="lftHd">Top Products</p>
+                            <div class="suggBox">
+                                <img src="assets/smimg.jpg" alt="">
+                                <div class="rytData">
+                                    <p>Mug Mockups</p>
+                                    <p><span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span></p>
+                                    <p>$99.0</p>
+                                </div>
+                            </div>
+                            <div class="suggBox">
+                                <img src="assets/smimg.jpg" alt="">
+                                <div class="rytData">
+                                    <p>T-Shirt blue</p>
+                                    <p><span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span></p>
+                                    <p>$199.0</p>
+                                </div>
+                            </div>
+                            <div class="suggBox">
+                                <img src="assets/smimg.jpg" alt="">
+                                <div class="rytData">
+                                    <p>Hard Coverbook</p>
+                                    <p><span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star "></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span></p>
+                                    <p>$49.0</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="centerAlign col-mg-10 col-md-10 col-sm-10 col-xs-10">
+                    <div class="col-mg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="contentAlign">
+                            <div><span>Showing</span><span id="crntShown"></span> of <span>results</span></div>
+                            <select class="selSort form-control">
+                                <option class="export_option" value="defSort">Default sorting</option>
+                                <option value="highPrice">High to Low</option>
+                                <option value="lowPrice">Low to High</option>
+                                <!-- <option value="highOff">High offers</option> -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cardsCont col-mg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="nopriceProd">Sorry, currently products at this price range is empty.</div>
+                    </div>
+                    <div class="centerAlign col-mg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="pagination">
+                            <a data-target="1" class="pgNum active">1</a>
+                            <a class="pgNum" data-target="2">2</a>
+                            <a class="pgNum" data-target="3">3</a>
+                            <a class="next">></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myProd" role="dialog">
+            <div class="modal-dialog" style="position: relative;">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                           <div class="criBg">
+                                &times;
+                           </div>
+                        </button>
+                        <h4 class="modal-title">Add Product</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form name="prdForm" class="needs-validation" novalidate>
+                            <div class="form-group">
+                                <label for="sel1">Product Category</label>
+                                <select type="text" value="" name="prodCate" placeholder="Select" class="form-control"
+                                    id="sel1">
+                                    <option selected value="bks">Books</option>
+                                    <option value="tsh">Hoodie/T-Shirt</option>
+                                    <option value="bgs">Bags</option>
+                                    <option value="mic">Misc</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pdname">Product Title</label>
+                                <input type="text" class="form-control" id="pdname" placeholder="Enter product title"
+                                    name="pdnames" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control" id="price" placeholder="Enter price"
+                                    name="prices" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="topPrds">
+                                <p>Top Products</p>
+                            </div>
+                            <div class="flupload">
+                                <input id="files" type="file" style="display: none;">
+                                <button class="btn addFl" id="buton">Add file</button>
+                            </div>
+                            <div class="btn-class">
+                                <button class="btn" class="btn cancel">Cancel</button>
+                                <button type="submit" class="btn subbtn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script src="script.js">
+
+    </script>
+</body>
+
+</html>
