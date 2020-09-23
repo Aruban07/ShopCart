@@ -238,16 +238,40 @@ slider.oninput = function () {
 	dumData = filterData;
 	mainDefaultcall();
 }
-
+var prePopid;
 window.addEventListener('load', function() {
     var forms = document.getElementsByClassName('needs-validation');
     var validation = Array.prototype.filter.call(forms, function(form) {
       form.addEventListener('submit', function(event) {
-		var namee = document.forms["prdForm"]['prices'].value
+		var priced = document.forms["prdForm"]['prices'].value;
+		var proNa = document.forms["prdForm"]['pdnames'].value;
+		var proCa = document.forms["prdForm"]['prodCate'].value
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
-        }
+		}
+		else{
+			event.preventDefault();
+			if(prePopid!==undefined){
+				prodData.find((w)=>{
+					if(w.id==prePopid){
+						w.price=priced;
+						w.cate=proCa;
+						w.prdHdr=proNa;
+					}
+				})
+			}
+			else{
+				var newlen=prodData.length;
+				var newDat={
+					'id':prodData[newlen-1].id,
+					'prdHdr':proNa,
+					'price':priced ,
+					'cate':proCa,
+				}
+				prodData.push(newDat)
+			}	
+		}
         form.classList.add('was-validated');
       }, false);
     });
@@ -264,9 +288,10 @@ window.addEventListener('load', function() {
 				return e;
 			}
 		});
-		var tit=$('#pdname').val(clck.prdHdr);
-		var prc=$('#price').val(clck.price);
-		var sele=$('#sel1').val(clck.cate);
+		$('#pdname').val(clck.prdHdr);
+		$('#price').val(clck.price);
+		$('#sel1').val(clck.cate);
+		prePopid=clck.id
 	}
 	$('.cates').click(function(){
 		var selCat=$(this).attr('data-target');
@@ -278,4 +303,8 @@ window.addEventListener('load', function() {
 		});
 		dumData=catelist;
 		mainDefaultcall();
+	})
+
+	$('.addProduct').click(function(){
+		prePopid=undefined;
 	})
